@@ -1,0 +1,14 @@
+.vs
+raytracing.pdb
+
+Debug/raytracing.*
+Release/raytracing.*
+
+raytracing/Debug/*
+raytracing/Debug/**/*
+raytracing/x64/Debug/*
+raytracing/x64/Debug/**/*
+raytracing/Release/*
+raytracing/Release/**/*
+raytracing/x64/Release/*
+raytracing/x64/Release/**/*
