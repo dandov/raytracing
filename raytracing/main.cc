@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
 			const float blue_ratio = static_cast<float>(j) / static_cast<float>(height);
 			image_bytes[coord] = 0;  // red
 			image_bytes[coord + 1] = 0;  // green
-			image_bytes[coord + 2] = 255;  // blue
+			image_bytes[coord + 2] = static_cast<int>(255.f * blue_ratio);  // blue
 		}
 	}
 
