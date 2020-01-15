@@ -8,18 +8,19 @@
 
 int main(int argc, char** argv) {
 	std::cout << "HENLO!!\n";
-	const size_t width = 200;
-	const size_t height = 100;
+	const size_t width = 960;
+	const size_t height = 540;
 	const size_t channels = 3;
 
 	std::vector<uint8_t> image_bytes(width * height * channels);
 	for (size_t i = 0; i < height; ++i) {
 		for (size_t j = 0; j < width; ++j) {
 			const size_t coord = i * width * channels + j * channels;
-			const float ratio = static_cast<float>(i) / static_cast<float>(height);
-			image_bytes[coord] = static_cast<uint8_t>((1.f - ratio) * 255.f);  // red
-			image_bytes[coord + 1] = 0;  // green
-			image_bytes[coord + 2] = static_cast<uint8_t>(ratio * 255.f);  // blue
+			const float horizontal_ratio = static_cast<float>(j) / static_cast<float>(width);
+			const float vertical_ratio = static_cast<float>(i) / static_cast<float>(height);
+			image_bytes[coord] = static_cast<uint8_t>((1.f - horizontal_ratio) * 255.f);  // red
+			image_bytes[coord + 1] = static_cast<uint8_t>((1.f - vertical_ratio) * 255.f);  // green
+			image_bytes[coord + 2] = 0.f;  // blue
 		}
 	}
 
