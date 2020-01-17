@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
 		std::cout << "Error creating texture.";
 	}
 
-	sf::Uint8* pixels = new sf::Uint8[width * height * 4];
+	sf::Uint8* pixels = new sf::Uint8[width * height * channels];
 	// pixels.resize(width * height * channels);
 	for (size_t i = 0; i < height; ++i) {
 		for (size_t j = 0; j < width; ++j) {
@@ -31,8 +31,8 @@ int main(int argc, char** argv) {
 			const float vertical_ratio = static_cast<float>(i) / static_cast<float>(height);
 			pixels[coord] = static_cast<uint8_t>((1.f - horizontal_ratio) * 255.f);  // red
 			pixels[coord + 1] = static_cast<uint8_t>((1.f - vertical_ratio) * 255.f);  // green
-			pixels[coord + 2] = 0.f;  // blue
-			pixels[coord + 2] = 1.f;  // alpha
+			pixels[coord + 2] = 0u;  // blue
+			pixels[coord + 3] = 255u;  // alpha
 		}
 	}
 	texture.update(&pixels[0]);
