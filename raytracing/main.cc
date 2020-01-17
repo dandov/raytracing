@@ -6,6 +6,8 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
+#include "SFML/Window.hpp"
+
 int main(int argc, char** argv) {
 	std::cout << "HENLO!!\n";
 	const size_t width = 960;
@@ -21,6 +23,21 @@ int main(int argc, char** argv) {
 			image_bytes[coord] = static_cast<uint8_t>((1.f - horizontal_ratio) * 255.f);  // red
 			image_bytes[coord + 1] = static_cast<uint8_t>((1.f - vertical_ratio) * 255.f);  // green
 			image_bytes[coord + 2] = 0.f;  // blue
+		}
+	}
+	
+	sf::Window window(sf::VideoMode(800, 600), "Raytracing in One Weekend!!!");
+	// Run the program as long as the window is open.
+	while (window.isOpen())
+	{
+		// Check all the window's events that were triggered since the last
+		// iteration of the loop.
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			// "Close requested" event: we close the window.
+			if (event.type == sf::Event::Closed)
+				window.close();
 		}
 	}
 
