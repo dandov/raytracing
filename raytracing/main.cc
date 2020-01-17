@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
 			const size_t coord = i * width * channels + j * channels;
 			const float horizontal_ratio = static_cast<float>(j) / static_cast<float>(width);
 			const float vertical_ratio = static_cast<float>(i) / static_cast<float>(height);
-			pixels[coord] = static_cast<uint8_t>((1.f - horizontal_ratio) * 255.f);  // red
+			pixels[coord] = static_cast<uint8_t>((horizontal_ratio) * 255.f);  // red
 			pixels[coord + 1] = static_cast<uint8_t>((1.f - vertical_ratio) * 255.f);  // green
 			pixels[coord + 2] = 0u;  // blue
 			pixels[coord + 3] = 255u;  // alpha
