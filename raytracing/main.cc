@@ -6,48 +6,67 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
-#include "SFML/Window.hpp"
+#include "SFML/Graphics.hpp"
 
 int main(int argc, char** argv) {
 	std::cout << "HENLO!!\n";
 	const size_t width = 960;
 	const size_t height = 540;
-	const size_t channels = 3;
+	const size_t channels = 4;
+	
+	// Create an SFML window.
+	sf::RenderWindow window(sf::VideoMode(width, height), "Ray Tracing in One Weekend!!!");
+	sf::Texture texture;
+	// Create empty texture.
+	if (!texture.create(width, height)) {
+		std::cout << "Error creating texture.";
+	}
 
-	std::vector<uint8_t> image_bytes(width * height * channels);
+	sf::Uint8* pixels = new sf::Uint8[width * height * 4];
+	// pixels.resize(width * height * channels);
 	for (size_t i = 0; i < height; ++i) {
 		for (size_t j = 0; j < width; ++j) {
 			const size_t coord = i * width * channels + j * channels;
 			const float horizontal_ratio = static_cast<float>(j) / static_cast<float>(width);
 			const float vertical_ratio = static_cast<float>(i) / static_cast<float>(height);
-			image_bytes[coord] = static_cast<uint8_t>((1.f - horizontal_ratio) * 255.f);  // red
-			image_bytes[coord + 1] = static_cast<uint8_t>((1.f - vertical_ratio) * 255.f);  // green
-			image_bytes[coord + 2] = 0.f;  // blue
+			pixels[coord] = static_cast<uint8_t>((1.f - horizontal_ratio) * 255.f);  // red
+			pixels[coord + 1] = static_cast<uint8_t>((1.f - vertical_ratio) * 255.f);  // green
+			pixels[coord + 2] = 0.f;  // blue
+			pixels[coord + 2] = 1.f;  // alpha
 		}
 	}
-	
-	sf::Window window(sf::VideoMode(800, 600), "Raytracing in One Weekend!!!");
-	// Run the program as long as the window is open.
-	while (window.isOpen())
-	{
-		// Check all the window's events that were triggered since the last
-		// iteration of the loop.
+	texture.update(&pixels[0]);
+	sf::Sprite sprite;
+	sprite.setTexture(texture);
+
+	// run the program as long as the window is open
+	while (window.isOpen()) {
+		// check all the window's events that were triggered since the last iteration of the loop
 		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			// "Close requested" event: we close the window.
-			if (event.type == sf::Event::Closed)
+		while (window.pollEvent(event)) {
+			// "close requested" event: we close the window
+			if (event.type == sf::Event::Closed) {
 				window.close();
+			}
 		}
+
+		// Clear the window with black color.
+		window.clear(sf::Color::Black);
+
+		// Draw image.
+		window.draw(sprite);
+
+		// End the current frame.
+		window.display();
 	}
 
-	constexpr int STBI_RGB_FORMAT = channels; // 1=Y, 2=YA, 3=RGB, 4=RGBA
 	// Distance in bytes from the first byte of a row of pixels to
-	// the first byte of the next row of pixels.
+		// the first byte of the next row of pixels.
 	const int stride = width * channels;
-	const int result = stbi_write_png("image.png", width, height, 
-		STBI_RGB_FORMAT, &image_bytes[0], stride);
-	stbi_write_jpg("image.jpg", width, height, channels, &image_bytes[0], 100);
+	// TODO(dandov): This is lighter after changing to RGBA.
+	const int result = stbi_write_png("image.png", width, height,
+		channels, pixels, stride);
+	stbi_write_jpg("image.jpg", width, height, channels, pixels, 100);
 	if (!result) {
 		std::cout << "Failed to write image...";
 		return 1;
