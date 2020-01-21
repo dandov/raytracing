@@ -1,6 +1,7 @@
 #include "image.h"
 
 #include <iostream>
+#include <memory>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -31,9 +32,8 @@ bool Image::Init(const ImageProperties& properties) {
 	}
 
 	properties_ = properties;
-	
-	pixels_ = std::make_unique<sf::Uint8[]>(
-		properties_.width * properties_.height * properties_.channels);
+	pixels_.reset(new sf::Uint8[
+		properties_.width * properties_.height * properties_.channels]);
 	texture_.update(pixels_.get());
 	sprite_.setTexture(texture_);
 }
@@ -72,7 +72,7 @@ bool Image::WriteToFile(const std::string& file_name, Image::FileFormat file_for
 				properties_.channels, pixels_.get(), stride);
 			break;
 		case Image::FileFormat::PNG:
-			stbi_write_jpg(file_name.c_str(), properties_.width, properties_.height,
+			result = stbi_write_jpg(file_name.c_str(), properties_.width, properties_.height,
 				properties_.channels, pixels_.get(), 100);
 			break;
 	};

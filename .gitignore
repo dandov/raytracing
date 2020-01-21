@@ -12,3 +12,6 @@ raytracing/Release/*
 raytracing/Release/**/*
 raytracing/x64/Release/*
 raytracing/x64/Release/**/*
+
+.DS_Store
+**/.DS_Store
