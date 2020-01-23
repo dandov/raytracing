@@ -20,6 +20,7 @@
 		E897C73323D6D10700824B5F /* image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image.h; sourceTree = "<group>"; };
 		E897C73423D6D10700824B5F /* image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = image.cpp; sourceTree = "<group>"; };
 		E897C73523D6D10700824B5F /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		E8C015A723D9781200291002 /* vec3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vec3.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 				E897C73223D6D10700824B5F /* stb_image_resize.h */,
 				E897C73123D6D10700824B5F /* stb_image_write.h */,
 				E897C73523D6D10700824B5F /* stb_image.h */,
+				E8C015A723D9781200291002 /* vec3.h */,
 				E897C72223D6CF4300824B5F /* Resources */,
 				E897C71B23D6CF4300824B5F /* Supporting Files */,
 			);
