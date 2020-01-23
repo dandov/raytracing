@@ -8,6 +8,8 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
+#include "vec3.h"
+
 namespace RayTracing {
 
 ImageProperties::ImageProperties()
@@ -41,15 +43,19 @@ bool Image::Init(const ImageProperties& properties) {
 void Image::Update(double dt_ms) {
 	for (size_t i = 0; i < properties_.height; ++i) {
 		for (size_t j = 0; j < properties_.width; ++j) {
+            
 			const size_t coord =
 				i * properties_.width * properties_.channels + j * properties_.channels;
 			const float horizontal_ratio =
 				static_cast<float>(j) / static_cast<float>(properties_.width);
 			const float vertical_ratio =
 				static_cast<float>(i) / static_cast<float>(properties_.height);
-			pixels_[coord] = static_cast<uint8_t>((horizontal_ratio) * 255.f);  // red
-			pixels_[coord + 1] = static_cast<uint8_t>((1.f - vertical_ratio) * 255.f);  // green
-			pixels_[coord + 2] = 0u;  // blue
+			
+            vec3 pixel(horizontal_ratio, (1.f - vertical_ratio), 0.f);
+            pixel *= 255.f;
+            pixels_[coord] = static_cast<uint8_t>(pixel.r());  // red
+			pixels_[coord + 1] = static_cast<uint8_t>(pixel.g());  // green
+			pixels_[coord + 2] = static_cast<uint8_t>(pixel.b());  // blue
 			pixels_[coord + 3] = 255u;  // alpha
 		}
 	}

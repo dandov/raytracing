@@ -39,6 +39,16 @@ class vec3 {
 		float data[3];
 };
 
+//inline std::istream& operator>>(std::istream& is, const vec3& v) {
+//    is >> v.x() >> v.y() >> v.z();
+//    return is;
+//}
+
+inline std::ostream& operator<<(std::ostream& os, const vec3& v) {
+    os << "[" << v.x() << ", " << v.y() << ", " << v.z() << "]";
+    return os;
+}
+
 inline vec3 operator+(const vec3& v1, const vec3& v2) {
     return vec3(v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]);
 }
