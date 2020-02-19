@@ -1,0 +1,7 @@
+﻿  image.cpp
+c:\users\dando\desktop\raytracing\raytracing\image.cpp(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\dando\desktop\raytracing\raytracing\image.cpp(45): warning C4018: '<': signed/unsigned mismatch
+  main.cc
+  Generating Code...
+c:\users\dando\desktop\raytracing\raytracing\image.cpp(41): warning C4715: 'RayTracing::Image::Init': not all control paths return a value
+  raytracing.vcxproj -> C:\Users\dando\Desktop\raytracing\Debug\raytracing.exe

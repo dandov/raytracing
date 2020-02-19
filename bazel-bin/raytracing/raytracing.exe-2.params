@@ -1,0 +1,13 @@
+/nologo
+/OUT:bazel-out/x64_windows-fastbuild/bin/raytracing/raytracing.exe
+bazel-out/x64_windows-fastbuild/bin/raytracing/_objs/raytracing/main.obj
+bazel-out/x64_windows-fastbuild/bin/raytracing/libraytracing.lib
+raytracing/sfml/lib/sfml-main-d.lib
+raytracing/sfml/lib/sfml-system-d.lib
+raytracing/sfml/lib/sfml-graphics-d.lib
+raytracing/sfml/lib/sfml-window-d.lib
+/SUBSYSTEM:CONSOLE
+/MACHINE:X64
+/DEFAULTLIB:msvcrt.lib
+/DEBUG:FASTLINK
+/INCREMENTAL:NO
