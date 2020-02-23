@@ -6,7 +6,11 @@
 
 class vec3 {
 	public:
-		vec3() = default;
+		vec3() {
+            data[0] = 0.f;
+            data[1] = 0.f;
+            data[2] = 0.f;
+        }
 		vec3(float e0, float e1, float e2) {
 			data[0] = e0;
 			data[1] = e1;
@@ -22,8 +26,8 @@ class vec3 {
 
 		inline const vec3& operator+() { return *this;  }
 		inline vec3 operator-() { return vec3(-data[0], -data[1], -data[2]); }
-		inline float operator[](int i) const { return data[i]; }
-        // inline float& operator[](int i) const { return data[i]; }
+        inline float operator[](int i) const { return data[i]; }
+		inline float& operator[](int i) { return data[i]; }
     
         inline vec3& operator+=(const vec3& v2);
         inline vec3& operator-=(const vec3& v2);
@@ -140,6 +144,10 @@ inline void vec3::Normalize() {
 inline vec3 Normalize(const vec3& v1) {
     const float inv_length = 1.f / v1.length();
     return v1 * inv_length;
+}
+
+inline vec3 unit_vector(vec3 v) {
+    return v / v.length();
 }
 
 #endif RAYTRACING_VEC3

@@ -5,8 +5,8 @@
 
 int main(int argc, char** argv) {
 	std::cout << "Ray Tracing!!\n";
-	const size_t width = 960;
-	const size_t height = 540;
+	const size_t width = 1000;
+	const size_t height = 500;
 	const size_t channels = 4;
 	
 	// Create an SFML window.
